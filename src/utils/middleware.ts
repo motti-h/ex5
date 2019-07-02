@@ -28,20 +28,26 @@ export function middleCheckName(req: Request, res: Response, next: NextFunction)
 }
 
 export function authenticate() {
-  return passport.authenticate('jwt', {session: false});
+  if (process.env.AUTH === 'true') {
+    return passport.authenticate('jwt', {session: false});
+  }
+  return (req: Request, res: Response, next: NextFunction) => { next(); };
 }
 
 export function authorize(...roles: UserRole[]) {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (!req.isAuthenticated()) {
-      res.sendStatus(401);
-      return;
-    }
-    const user = req.user as UserCredential;
-    if (!roles.find(r => user.roles.indexOf(r) >= 0)) {
-      res.sendStatus(403);
-      return;
-    }
-    next();
-  };
+  if (process.env.AUTH === 'true') {
+    return (req: Request, res: Response, next: NextFunction) => {
+      if (!req.isAuthenticated()) {
+        res.sendStatus(401);
+        return;
+      }
+      const user = req.user as UserCredential;
+      if (!roles.find(r => user.roles.indexOf(r) >= 0)) {
+        res.sendStatus(403);
+        return;
+      }
+      next();
+    };
+  }
+  return (req: Request, res: Response, next: NextFunction) => { next(); };
 }

@@ -1,11 +1,12 @@
 import { Product } from '../models';
-import { store } from '../store';
+import * as store from '../store';
 import { Response, Request, NextFunction, RequestHandler } from 'express';
 import * as productUtils from '../utils/productUtils';
 import * as Logger from '../utils/logger';
 import * as validation from '../validation/common';
 
-const products = store.products;
+let products = store.products;
+
 const sizeIlegal = 3;
 const createLogger = Logger.createLogger('productLogger');
 

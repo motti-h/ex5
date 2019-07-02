@@ -1,12 +1,19 @@
-export enum KnownConfigKey {
-  JwtSecret = 'jwt-sign-secret',
+import * as dotenv from 'dotenv';
+
+function init() {
+  dotenv.config({path: process.env.DOTENV_CONFIG_PATH});
 }
 
-function get(key: string): string {
-  // TODO: implement properly
-  return 'your_jwt_secret';
+export enum KnownConfigKey {
+  JwtSecret = 'JWT_SIGN_SECRET',
+  ServerPort= 'SERVER_PORT',
+}
+
+function get(key: string, defoultPort: string = ''): string {
+  return process.env[key] || defoultPort;
 }
 
 export default {
   get,
+  init,
 };

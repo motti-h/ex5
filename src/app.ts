@@ -1,10 +1,12 @@
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import {config} from './routes/routeConfig';
+import {routeConfig} from './routes/routeConfig';
 import expressWinston from 'express-winston';
 import winston from 'winston';
 import * as middle from './utils/middleware';
 import {initPassport} from './utils/passport';
+import exphbs from 'express-handlebars';
 
 const alignedWithColorsAndTime = winston.format.combine(
   winston.format.colorize(),
@@ -25,14 +27,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
+app.use('/api/public', express.static(path.join(__dirname, 'public')));
 app.use(expressWinston.logger({
   transports: [new winston.transports.Console()],
   format: alignedWithColorsAndTime,
 }));
 
-Object.keys(config).forEach((k) => {
-    const routeConfig = config[k];
-    app.use(routeConfig.prefix, routeConfig.router);
+app.set('views', path.join(__dirname, 'views'));
+app.engine('handlebars', exphbs({
+defaultLayout: 'main',
+helpers: {
+increment: (v: number) => v + 1,
+},
+}));
+app.set('view engine', 'handlebars');
+
+Object.keys(routeConfig).forEach((k) => {
+    const routeConf = routeConfig[k];
+    app.use(routeConf.prefix, routeConf.router);
   });
 
 app.use(expressWinston.errorLogger({
@@ -41,4 +53,5 @@ app.use(expressWinston.errorLogger({
 }));
 
 app.use(middle.endError);
+
 export { app };

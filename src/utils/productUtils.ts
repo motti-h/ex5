@@ -1,18 +1,16 @@
-import { store } from '../store';
+import * as store from '../store';
 import { Product } from '../models';
 
-const products = store.products;
-
 function getAllProducts(): Product[] {
-  return products;
+  return store.products;
 }
 
 function findProduct(id: number): Product | undefined {
-  return products.find(p => p.id === id.toString());
+  return store.products.find(p => p.id === id.toString());
 }
 
 function getProductsLength(): number {
-  return products.length;
+  return store.products.length;
 }
 
 export {

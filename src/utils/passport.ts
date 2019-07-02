@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import { store } from '../store';
+import * as store from '../store';
 import config, { KnownConfigKey } from '../utils/config';
 import { UserCredential } from '../models';
 
