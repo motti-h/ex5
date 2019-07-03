@@ -1,5 +1,5 @@
-
 import config, { KnownConfigKey } from './utils/config';
+import {httpCalls} from './utils/httpCalls';
 config.init();
 import { app } from './app';
 
@@ -15,5 +15,4 @@ const server = app.listen(app.get('port'), () => {
     console.log('  Press CTRL-C to stop\n');
   });
 
-
-
+httpCalls();

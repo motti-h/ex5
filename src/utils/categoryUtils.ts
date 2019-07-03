@@ -1,6 +1,6 @@
-import * as store from '../store';
+import {store} from '../store';
 import {Category} from '../models/category';
-const categories = store.categories;
+
 function getAllCategories() : Category[]
 {
     return store.categories;

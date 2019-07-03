@@ -1,5 +1,5 @@
 import { Product } from '../models';
-import * as store from '../store';
+import {store} from '../store';
 import { Response, Request, NextFunction, RequestHandler } from 'express';
 import * as productUtils from '../utils/productUtils';
 import * as Logger from '../utils/logger';

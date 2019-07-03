@@ -1,5 +1,5 @@
 import express from 'express';
-import * as store from '../store';
+import {store} from '../store';
 
 const clientRouter = express.Router();
 

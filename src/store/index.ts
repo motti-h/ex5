@@ -20,19 +20,6 @@ interface Store {
   credentials: UserCredential[];
 }
 
-const baseUrl = 'http://localhost:' + '3000';
-
-(async () => {
-  const usersClient = request.defaults({
-    baseUrl: `${baseUrl}/api/public`,
-    json: true,
-  });
-
-  products = await usersClient.get('/products.json');
-  categories = await usersClient.get('/categories.json');
-  users = await usersClient.get('/users.json');
-})();
-
 let store: Store = {
   products,
   categories,
@@ -45,4 +32,4 @@ let store: Store = {
   ],
 };
 
-export { products, categories, users, credentials };
+export {store};

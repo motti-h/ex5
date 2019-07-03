@@ -1,5 +1,5 @@
 import { Category } from '../models';
-import * as store from '../store';
+import {store} from '../store';
 import { Response, Request, NextFunction } from 'express';
 import * as categoryUtils from '../utils/categoryUtils';
 import * as Logger from '../utils/logger';
