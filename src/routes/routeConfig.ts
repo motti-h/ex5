@@ -22,7 +22,7 @@ const routeConfig: { [k: string]: RouteConfig } = {
     router: loginRouter,
   },
   client: {
-    prefix: '/api/home',
+    prefix: '/app',
     router: clientRouter,
   },
 };

@@ -4,7 +4,6 @@ import request from 'request-promise';
 //import categories from './categories.json';
 //import users from './users.json';
 
-
 let products: Product[] = [];
 let categories: Category[] = [];
 let users: User[] = [];
@@ -32,10 +31,7 @@ const baseUrl = 'http://localhost:' + '3000';
   products = await usersClient.get('/products.json');
   categories = await usersClient.get('/categories.json');
   users = await usersClient.get('/users.json');
-  console.log(categories);
-
 })();
-
 
 let store: Store = {
   products,
